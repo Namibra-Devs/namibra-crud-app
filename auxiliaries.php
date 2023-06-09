@@ -1,14 +1,18 @@
 <?php
-require_once './conn.php';
-class Employee
-{
-    private $db;
+require_once './conn.php'; //IMPORT THE DATABASE CONNECTION FILE
 
-    public function __construct($b)
+class Employee //CREATING THE EMPLOYEE CLASS
+
+{
+    private $db; //DECLARE $db AS A PRIVATE VARIABLE
+
+    public function __construct($b) //PASSING $db AS A CONSTRUCTER 
+
     {
         $this->db = $b;
     }
-    public function create($data)
+    public function create($data) //DECLARE THE CREATE METHOD 
+
     {
         $query = "INSERT INTO employee (name, position, age, imageSrc) VALUES (:name, :position, :age, :imageSrc)";
         $stmt = $this->db->prepare($query);
@@ -20,16 +24,16 @@ class Employee
         return $stmt->execute();
     }
 
-    public function getAll()
+    public function getAll()  //DECLARE THE READ METHOD OR THE GET
+
     {
         $query = "SELECT * FROM employee";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);  //FETCHING DATA AS ASSOCIATIVE ARRAY
     }
 
-    public function update($id, $data)
+    public function update($id, $data) //THE UPDATE METHOD
     {
         $query = "UPDATE employee SET name = :name, position = :position, age = :age, imageSrc = :imageSrc WHERE id = :id";
         $stmt = $this->db->prepare($query);
@@ -42,7 +46,7 @@ class Employee
         return $stmt->execute();
     }
 
-    public function delete($id)
+    public function delete($id) //THE DELETE METHOD
     {
         $query = "DELETE FROM employee WHERE id = :id";
         $stmt = $this->db->prepare($query);

@@ -3,17 +3,15 @@ require_once "./auxiliaries.php";
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Delete the employee record
-    $employee = new Employee($db);
-    $result = $employee->delete($id);
+    $employee = new Employee($db); //CREATE A NEW EMPLOYEE INSTANCE
+    $result = $employee->delete($id); //CALL THE EMPLOYEE METHOD
 
-    // Check if the deletion was successful
+    // CHECK IF DELETION WAS SUCCESFULL
     if ($result) {
-        // Redirect to the dashboard or any other page
-        header('Location: ./dashboard.php');
+        header('Location: ./dashboard.php'); //REDIRECT USER TO THE DASHBOARD
         exit();
     } else {
-        // Handle the error if the deletion fails
-        echo 'Error deleting the employee record.';
+
+        echo 'Error deleting the employee record.'; // DISPLAY ERROR MESSAGE
     }
 }

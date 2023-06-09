@@ -2,27 +2,27 @@
 require_once "./auxiliaries.php";
 
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) { //CHECKING IF SUBMIT IS CLICKED
     $uploadFile = $_FILES['image']['name'];
     $name = $_POST['name'];
     $position = $_POST['position'];
     $age = $_POST['age'];
     $img = $uploadFile;
 
-    if ($name != '' && $position != '' && $age != '' && $_FILES['image']['name'] != '') {
+    if ($name != '' && $position != '' && $age != '' && $_FILES['image']['name'] != '') { //CHECKING FOR EMPTY FIELDS
         $targetFolder = "image_uploads/";
         $uploadFile = $_FILES['image']['name'];
         $filename = $targetFolder . basename($uploadFile);
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $filename)) {
-            $data = [
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $filename)) { //MOVING IMAGE TO image_uploads FOLDER
+            $data = [       // CREATING THE DATA OBJECT
                 'name' => $name,
                 'position' => $position,
                 'age' => $age,
                 'imageSrc' => $img
             ];
-            $employee = new Employee($db);
-            $employee->create($data);
-            header("Location: dashboard.php");
+            $employee = new Employee($db); //CREATING AN OBJECT OF THE EMPLOYEE CLASS
+            $employee->create($data);   //INSERT USER DETAILS IN THE DATABASE
+            header("Location: dashboard.php"); //REDIRECT USER BACK TO DASHBOARD
         }
     }
 }
@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
 <body>
 
     <a href="./dashboard.php"><button type="button" class="btn btn-success">View Dashboard</button></a>
+    <!-- INPUT FORMS GOES HERE -->
     <form method="POST" action="./create.php" enctype="multipart/form-data">
         <h1 class="text-primary text-center m-4">ADD NEW USER</h1>
         <div class="form-group md-3">

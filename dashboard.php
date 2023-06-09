@@ -1,7 +1,9 @@
 <?php
 require_once "./auxiliaries.php";
-
+//CREATING AN OBJECT OF THE EMPLOYEE CLASS
 $employee = new Employee($db);
+
+//SELECTING EMPLOYEES FROM THE DATABASE
 $result = $employee->getAll();
 
 ?>
@@ -13,6 +15,7 @@ $result = $employee->getAll();
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./styles/style.css" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Namibra - Crud App</title>
 </head>
@@ -30,8 +33,11 @@ $result = $employee->getAll();
       </div>
     </div>
 
-    <!-- individual card items -->
-    <?php foreach ($result as $user) { ?>
+    <!-- INDIVIDUAL CARD ITEMS -->
+    <?php foreach ($result as $user) {
+      // USING THE FOREACH LOOP TO RENDER CARDS ON DASHBOARD
+    ?>
+
       <div class="employeeCard flexItems centerEmployeeCard">
         <div class="cardChild cardimageSection">
           <img src="<?php echo "./image_uploads/" . $user['imageSrc'] ?>" height="100%" width="80%" class="centerImage" />
@@ -60,8 +66,10 @@ $result = $employee->getAll();
           </div>
         </div>
       </div>
-    <?php } ?>
-    <!-- end of card item -->
+    <?php }
+    // ENDING THE FOREACH LOOP
+    ?>
+    <!-- END OF CARD ITEM -->
   </main>
 </body>
 

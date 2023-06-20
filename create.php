@@ -1,28 +1,33 @@
 <?php
 require_once "./auxiliaries.php";
 
-
-if (isset($_POST['submit'])) { //CHECKING IF SUBMIT IS CLICKED
+//CHECKING IF SUBMIT IS CLICKED
+if (isset($_POST['submit'])) {
     $uploadFile = $_FILES['image']['name'];
     $name = $_POST['name'];
     $position = $_POST['position'];
     $age = $_POST['age'];
     $img = $uploadFile;
-
-    if ($name != '' && $position != '' && $age != '' && $_FILES['image']['name'] != '') { //CHECKING FOR EMPTY FIELDS
+    //CHECKING FOR EMPTY FIELDS
+    if ($name != '' && $position != '' && $age != '' && $_FILES['image']['name'] != '') {
         $targetFolder = "image_uploads/";
         $uploadFile = $_FILES['image']['name'];
         $filename = $targetFolder . basename($uploadFile);
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $filename)) { //MOVING IMAGE TO image_uploads FOLDER
-            $data = [       // CREATING THE DATA OBJECT
+        //MOVING IMAGE TO image_uploads FOLDER
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $filename)) {
+            // CREATING THE DATA OBJECT
+            $data = [
                 'name' => $name,
                 'position' => $position,
                 'age' => $age,
                 'imageSrc' => $img
             ];
-            $employee = new Employee($db); //CREATING AN OBJECT OF THE EMPLOYEE CLASS
-            $employee->create($data);   //INSERT USER DETAILS IN THE DATABASE
-            header("Location: dashboard.php"); //REDIRECT USER BACK TO DASHBOARD
+            //CREATING AN OBJECT OF THE EMPLOYEE CLASS
+            $employee = new Employee($db);
+            //INSERT USER DETAILS IN THE DATABASE
+            $employee->create($data);
+            //REDIRECT USER BACK TO DASHBOARD  
+            header("Location: dashboard.php");
         }
     }
 }

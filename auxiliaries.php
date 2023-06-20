@@ -33,6 +33,32 @@ class Employee //CREATING THE EMPLOYEE CLASS
         return $stmt->fetchAll(PDO::FETCH_ASSOC);  //FETCHING DATA AS ASSOCIATIVE ARRAY
     }
 
+//     public function update($id, $data)
+// {
+//     $fields = array();
+//     $params = array(':id' => $id);
+
+//     // Build the SET clause dynamically
+//     foreach ($data as $key => $value) {
+//         if (!empty($value)) {
+//             $fields[] = "$key = :$key";
+//             $params[":$key"] = $value;
+//         }
+//     }
+
+//     // Prepare the query
+//     $query = "UPDATE employee SET " . implode(", ", $fields) . " WHERE id = :id";
+//     $stmt = $this->db->prepare($query);
+
+//     // Bind parameters
+//     foreach ($params as $param => $value) {
+//         $stmt->bindParam($param, $value);
+//     }
+
+//     return $stmt->execute();
+// }
+
+
     public function update($id, $data) //THE UPDATE METHOD
     {
         $query = "UPDATE employee SET name = :name, position = :position, age = :age, imageSrc = :imageSrc WHERE id = :id";
